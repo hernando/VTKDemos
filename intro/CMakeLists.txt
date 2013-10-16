@@ -16,4 +16,4 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 add_executable(hello hello.cpp)
-target_link_libraries(hello vtkCommon vtkIO vtkRendering vtkVolumeRendering)
+target_link_libraries(hello ${VTK_LIBRARIES})

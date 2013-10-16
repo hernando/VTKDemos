@@ -25,7 +25,7 @@
 #include <vtkSmartPointer.h>
 #include <vtkProperty.h>
 
-int main(int argc, char *argv[])
+int main()
 {
     /* Source data object that represents a sphere. */
     vtkSmartPointer<vtkSphereSource> sphere = vtkSphereSource::New();
@@ -54,7 +54,6 @@ int main(int argc, char *argv[])
     vtkSmartPointer<vtkRenderWindow> win = vtkRenderWindow::New();
     win->AddRenderer(renderer);
     win->SetSize(800, 800);
-    renderer->Render();
 
     /* Creating the interactor that handles the window events and provides
        the main rendering loop */

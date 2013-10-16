@@ -1,0 +1,4 @@
+#set(VTK_FIND_ARGS NO_MODULE)
+set(VTK_PACKAGE_VERSION 6.0)
+set(VTK_REPO_URL http://vtk.org/VTK.git)
+set(VTK_REPO_TAG v6.0.0)

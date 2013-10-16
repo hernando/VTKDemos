@@ -35,10 +35,10 @@ include(UpdateFile)
 git_external("${CMAKE_BINARY_DIR}/Buildyard"
   https://github.com/Eyescale/Buildyard.git master)
 
-update_file("${CMAKE_SOURCE_DIR}/CMake/${CMAKE_PROJECT_NAME}.cmake"
-  "${CMAKE_BINARY_DIR}/Buildyard/config.Buildyard/${CMAKE_PROJECT_NAME}.cmake")
-update_file("${CMAKE_SOURCE_DIR}/CMake/depends.txt"
-  "${CMAKE_BINARY_DIR}/Buildyard/config.Buildyard/depends.txt")
+update_file("${CMAKE_SOURCE_DIR}/CMake/VTKDemos.cmake"
+  "${CMAKE_BINARY_DIR}/Buildyard/config.Buildyard/VTKDemos.cmake")
+update_file("${CMAKE_SOURCE_DIR}/CMake/VTK.cmake"
+  "${CMAKE_BINARY_DIR}/Buildyard/config.Buildyard/VTK.cmake")
 
 set(BUILDYARD_TARGETS ${CMAKE_PROJECT_NAME})
 add_subdirectory("${CMAKE_BINARY_DIR}/Buildyard" # source
