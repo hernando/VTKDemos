@@ -18,7 +18,7 @@ if(BUILDYARD)
   return()
 endif()
 
-option(DISABLE_BUILDYARD "Disable bootstrapping using Buildyard" OFF)
+option(DISABLE_BUILDYARD "Disable bootstrapping using Buildyard" ON)
 if(DISABLE_BUILDYARD)
   return()
 endif()

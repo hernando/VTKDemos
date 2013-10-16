@@ -3,27 +3,11 @@
 include(System)
 list(APPEND FIND_PACKAGES_DEFINES ${SYSTEM})
 
-find_package(Equalizer 1.7  REQUIRED)
 find_package(Boost 1.41.0  REQUIRED)
-find_package(VTK  NO_MODULE REQUIRED)
+find_package(VTK 6 REQUIRED)
 
 if(EXISTS ${CMAKE_SOURCE_DIR}/CMake/FindPackagesPost.cmake)
   include(${CMAKE_SOURCE_DIR}/CMake/FindPackagesPost.cmake)
-endif()
-
-if(Equalizer_FOUND)
-  set(Equalizer_name Equalizer)
-endif()
-if(EQUALIZER_FOUND)
-  set(Equalizer_name EQUALIZER)
-endif()
-if(Equalizer_name)
-  list(APPEND FIND_PACKAGES_DEFINES VTKDEMOS_USE_EQUALIZER)
-  set(FIND_PACKAGES_FOUND "${FIND_PACKAGES_FOUND} Equalizer")
-  link_directories(${${Equalizer_name}_LIBRARY_DIRS})
-  if(NOT "${${Equalizer_name}_INCLUDE_DIRS}" MATCHES "-NOTFOUND")
-    include_directories(${${Equalizer_name}_INCLUDE_DIRS})
-  endif()
 endif()
 
 if(Boost_FOUND)
@@ -58,7 +42,7 @@ endif()
 
 set(VTKDEMOS_BUILD_DEBS autoconf;automake;bison;cmake;flex;freeglut3-dev;git;git-review;git-svn;libavahi-compat-libdnssd-dev;libavcodec-dev;libavformat-dev;libavutil-dev;libboost-date-time-dev;libboost-program-options-dev;libboost-regex-dev;libboost-serialization-dev;libboost-system-dev;libgl1-mesa-dev;libglewmx1.6-dev;libhwloc-dev;libibverbs-dev;libjpeg-turbo8-dev;libopencv-dev;libopenmpi-dev;libopenscenegraph-dev;libqt4-dev;librdmacm-dev;libspnav-dev;libswscale-dev;libturbojpeg;libudt-dev;libx11-dev;libxmu-dev;ninja-build;pkg-config;subversion)
 
-set(VTKDEMOS_DEPENDS Equalizer;Boost;VTK)
+set(VTKDEMOS_DEPENDS Boost;VTK)
 
 # Write defines.h and options.cmake
 if(NOT PROJECT_INCLUDE_NAME)
