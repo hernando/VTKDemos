@@ -20,9 +20,17 @@ cmake_minimum_required(VERSION 2.8.8 FATAL_ERROR)
 project(VTKDemos)
 
 ###############################################################################
-## COMMON OPTIONS
+## BUILDYARD BOOTSTRAP
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
+include(Buildyard)
+if(BUILDYARD_STOP)
+  return()
+endif()
+
+###############################################################################
+## COMMON OPTIONS
+
 include(Common)
 
 ###############################################################################
