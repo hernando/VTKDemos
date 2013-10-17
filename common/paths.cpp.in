@@ -1,0 +1,18 @@
+#include "common/paths.h"
+
+#include <iostream>
+
+namespace common
+{
+
+std::string shaderPath()
+{
+    return "${CONFIG_SHADER_PATH}/";
+}
+
+std::string dataPath()
+{
+    return "${CONFIG_DATA_PATH}/";
+}
+
+}

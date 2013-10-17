@@ -1,3 +1,4 @@
+#!/usr/bin/python
 #
 # VTKDemos
 # Copyright (C) 2013 Juan Hernando jhernando@fi.upm.es
@@ -15,12 +16,34 @@
 # this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-configure_paths(PATHS_CPP)
+import paths
+from vtk import *
 
-add_executable(hello hello.cpp ${PATHS_CPP})
-target_link_libraries(hello ${VTK_LIBRARIES})
+sphere = vtkSphereSource()
+sphere.SetCenter(0, 0, 0)
+sphere.SetRadius(1)
 
-configure_file(paths.py.in ${CMAKE_BINARY_DIR}/bin/paths.py)
+mapper = vtkPolyDataMapper()
+mapper.SetInputConnection(sphere.GetOutputPort())
 
-update_file(hello.py ${CMAKE_BINARY_DIR}/bin/hello.py)
+actor = vtkActor()
+actor.SetMapper(mapper)
+actor.GetProperty().SetColor(1, 0, 0)
+
+renderer = vtkRenderer()
+renderer.AddActor(actor)
+renderer.SetBackground(0.2, 0.3, 0.4)
+
+win = vtkRenderWindow()
+win.AddRenderer(renderer)
+win.SetSize(800, 800)
+
+interactor = vtkRenderWindowInteractor()
+interactor.SetRenderWindow(win)
+interactor.Initialize()
+interactor.Start()
+
+
+
+
 

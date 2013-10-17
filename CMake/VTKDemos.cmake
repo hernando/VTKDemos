@@ -3,7 +3,8 @@ set(VTKDEMOS_PACKAGE_VERSION 1.0.0)
 set(VTKDEMOS_REPO_URL ssh://git@bb4.cesvima.upm.es/VTKDemos.git)
 set(VTKDEMOS_DEPENDS REQUIRED Boost VTK)
 set(VTKDEMOS_VTK_COMPONENTS vtkCommonCore vtkCommonDataModel
-  vtkRenderingVolumeOpenGL vtkRenderingOpenGL vtkInteractionStyle)
+  vtkRenderingVolumeOpenGL vtkRenderingOpenGL vtkInteractionStyle
+  vtkIOPLY)
 set(VTKDEMOS_FORCE_BUILD {CI_BUILD})
 
 

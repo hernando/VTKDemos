@@ -37,11 +37,30 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Debug)
 endif(NOT CMAKE_BUILD_TYPE)
 
+include_directories(${CMAKE_SOURCE_DIR})
+set(_paths_cpp_in ${CMAKE_SOURCE_DIR}/common/paths.cpp.in)
+macro(CONFIGURE_PATHS PATHS_FILE)
+  set(CONFIG_SHADER_PATH ${CMAKE_CURRENT_SOURCE_DIR}/shaders)
+  set(CONFIG_DATA_PATH ${CMAKE_SOURCE_DIR}/datasets)
+  configure_file(${_paths_cpp_in} ${CMAKE_CURRENT_BINARY_DIR}/paths.cpp)
+
+  set(${PATHS_FILE} ${CMAKE_CURRENT_BINARY_DIR}/paths.cpp)
+endmacro()
+
 ###############################################################################
 ## EXTERNAL DEPENDENCIES
 
 include(FindPackages)
 include(${VTK_USE_FILE})
+
+# This needs to go after FindPackages, so we can't put it in common.
+execute_process(COMMAND
+  ${PYTHON_EXECUTABLE} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(1,0,prefix=''))"
+  OUTPUT_VARIABLE PYTHON_LIBRARY_PREFIX OUTPUT_STRIP_TRAILING_WHITESPACE)
+# Shouldn't the prefix end with site-packages instead of dist-packages
+set(PYTHON_LIBRARY_PREFIX "lib/python2.7/site-packages")
+
+message(STATUS "Python Lib Prefix: ${PYTHON_LIBRARY_PREFIX}")
 
 ###############################################################################
 ## SUBPROJECTS

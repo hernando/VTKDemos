@@ -5,7 +5,9 @@ list(APPEND FIND_PACKAGES_DEFINES ${SYSTEM})
 
 find_package(Boost 1.41.0  REQUIRED)
 find_package(VTK 6 COMPONENTS vtkCommonCore vtkCommonDataModel
-  vtkRenderingVolumeOpenGL vtkRenderingOpenGL vtkInteractionStyle REQUIRED)
+  vtkRenderingVolumeOpenGL vtkRenderingOpenGL vtkInteractionStyle
+  vtkIOPLY REQUIRED)
+find_package(PythonInterp  REQUIRED)
 
 if(EXISTS ${CMAKE_SOURCE_DIR}/CMake/FindPackagesPost.cmake)
   include(${CMAKE_SOURCE_DIR}/CMake/FindPackagesPost.cmake)
@@ -41,9 +43,24 @@ if(VTK_name)
   endif()
 endif()
 
+if(PythonInterp_FOUND)
+  set(PythonInterp_name PythonInterp)
+endif()
+if(PYTHONINTERP_FOUND)
+  set(PythonInterp_name PYTHONINTERP)
+endif()
+if(PythonInterp_name)
+  list(APPEND FIND_PACKAGES_DEFINES RTNEURON_USE_PYTHONINTERP)
+  set(FIND_PACKAGES_FOUND "${FIND_PACKAGES_FOUND} PythonInterp")
+  link_directories(${${PythonInterp_name}_LIBRARY_DIRS})
+  if(NOT "${${PythonInterp_name}_INCLUDE_DIRS}" MATCHES "-NOTFOUND")
+    include_directories(${${PythonInterp_name}_INCLUDE_DIRS})
+  endif()
+endif()
+
 set(VTKDEMOS_BUILD_DEBS autoconf;automake;bison;cmake;flex;freeglut3-dev;git;git-review;git-svn;libavahi-compat-libdnssd-dev;libavcodec-dev;libavformat-dev;libavutil-dev;libboost-date-time-dev;libboost-program-options-dev;libboost-regex-dev;libboost-serialization-dev;libboost-system-dev;libgl1-mesa-dev;libglewmx1.6-dev;libhwloc-dev;libibverbs-dev;libjpeg-turbo8-dev;libopencv-dev;libopenmpi-dev;libopenscenegraph-dev;libqt4-dev;librdmacm-dev;libspnav-dev;libswscale-dev;libturbojpeg;libudt-dev;libx11-dev;libxmu-dev;ninja-build;pkg-config;subversion)
 
-set(VTKDEMOS_DEPENDS Boost;VTK)
+set(VTKDEMOS_DEPENDS Boost;VTK;PythonInterp)
 
 # Write defines.h and options.cmake
 if(NOT PROJECT_INCLUDE_NAME)
