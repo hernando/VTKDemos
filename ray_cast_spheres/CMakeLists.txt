@@ -15,3 +15,12 @@
 # this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+configure_paths(PATHS_CPP)
+
+add_executable(ray_cast_spheres ray_cast_spheres.cpp ${PATHS_CPP})
+target_link_libraries(ray_cast_spheres ${VTK_LIBRARIES})
+
+#configure_file(paths.py.in ${CMAKE_BINARY_DIR}/bin/paths.py)
+
+#update_file(hello.py ${CMAKE_BINARY_DIR}/bin/hello.py)
+

@@ -56,7 +56,7 @@ int main()
        mesh. */
     vtkSmartPointer<vtkPolyDataMapper> mapper = vtkPolyDataMapper::New();
     mapper->SetInputConnection(sphere->GetOutputPort());
-    std::cout << typeid(*mapper).name() << std::endl;
+    //std::cout << typeid(*mapper).name() << std::endl;
 
     /* Creating the actor that will place the polygonal mesh into the
        scene and manage it's render attributes. */
@@ -68,11 +68,11 @@ int main()
     vtkSmartPointer<vtkRenderer> renderer = vtkRenderer::New();
     renderer->AddActor(actor);
     renderer->SetBackground(0.2, 0.3, 0.4);
-    std::cout << typeid(*renderer).name() << std::endl;
+    //std::cout << typeid(*renderer).name() << std::endl;
 
-    addConeActor(renderer);
+    //addConeActor(renderer);
     addTetrahedron(renderer);
-    loadPlyModel(renderer);
+    //loadPlyModel(renderer);
 
     vtkSmartPointer<vtkRenderWindow> window = vtkRenderWindow::New();
     window->AddRenderer(renderer);
@@ -126,8 +126,8 @@ void addTetrahedron(vtkRenderer *renderer)
     vtkSmartPointer<vtkPolyDataMapper> mapper = vtkPolyDataMapper::New();
     mapper->SetInputDataObject(0, data);
 
-    data->GetInformation()->Print(std::cout);
-    mapper->GetInputInformation()[0].Print(std::cout);
+    //data->GetInformation()->Print(std::cout);
+    //mapper->GetInputInformation()[0].Print(std::cout);
 
     vtkSmartPointer<vtkActor> actor = vtkActor::New();
     actor->SetPosition(3.2, 0, 0);
@@ -141,7 +141,6 @@ void loadPlyModel(vtkRenderer *renderer)
 {
     vtkSmartPointer<vtkPLYReader> reader = vtkPLYReader::New();
     reader->SetFileName((common::dataPath() + "/bunny.ply").c_str());
-    std::cout << common::dataPath() + "/bunny.ply" << std::endl;
 
     /* Smoothing the model. The smoothing simply computes per vertex normals
        and assigns them as attribute data to the vertices */
