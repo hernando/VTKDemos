@@ -15,3 +15,9 @@
 # this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+configure_paths(PATHS_CPP)
+
+add_executable(isosurfaces isosurfaces.cpp ${PATHS_CPP})
+target_link_libraries(isosurfaces ${VTK_LIBRARIES})
+
+#update_file(isosurfaces.py ${CMAKE_BINARY_DIR}/bin/isosurfaces.py)
