@@ -15,3 +15,7 @@
 # this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+configure_paths(PATHS_CPP)
+
+add_executable(volume_rendering volume_rendering.cpp ${PATHS_CPP})
+target_link_libraries(volume_rendering ${VTK_LIBRARIES})

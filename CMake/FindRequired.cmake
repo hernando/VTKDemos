@@ -6,9 +6,7 @@ find_package(Boost 1.41.0 QUIET)
 if(NOT Boost_FOUND AND NOT BOOST_FOUND)
   set(FIND_REQUIRED_FAILED "${FIND_REQUIRED_FAILED} Boost")
 endif()
-find_package(VTK 6 COMPONENTS vtkCommonCore vtkCommonDataModel
-  vtkRenderingVolumeOpenGL vtkRenderingOpenGL vtkInteractionStyle
-  vtkIOPLY QUIET)
+find_package(VTK 6 QUIET)
 if(NOT VTK_FOUND AND NOT VTK_FOUND)
   set(FIND_REQUIRED_FAILED "${FIND_REQUIRED_FAILED} VTK")
 endif()

@@ -20,7 +20,5 @@ configure_paths(PATHS_CPP)
 add_executable(hello hello.cpp ${PATHS_CPP})
 target_link_libraries(hello ${VTK_LIBRARIES})
 
-configure_file(paths.py.in ${CMAKE_BINARY_DIR}/bin/paths.py)
-
 update_file(hello.py ${CMAKE_BINARY_DIR}/bin/hello.py)
 

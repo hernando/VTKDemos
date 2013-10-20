@@ -15,3 +15,10 @@
 # this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+configure_paths(PATHS_CPP)
+
+add_executable(streamlines streamlines.cpp ${PATHS_CPP})
+target_link_libraries(streamlines ${VTK_LIBRARIES})
+
+#update_file(streamlines.py ${CMAKE_BINARY_DIR}/bin/streamlines.py)
+

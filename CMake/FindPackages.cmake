@@ -4,9 +4,7 @@ include(System)
 list(APPEND FIND_PACKAGES_DEFINES ${SYSTEM})
 
 find_package(Boost 1.41.0  REQUIRED)
-find_package(VTK 6 COMPONENTS vtkCommonCore vtkCommonDataModel
-  vtkRenderingVolumeOpenGL vtkRenderingOpenGL vtkInteractionStyle
-  vtkIOPLY REQUIRED)
+find_package(VTK 6 NO_MODULE REQUIRED)
 find_package(PythonInterp  REQUIRED)
 
 if(EXISTS ${CMAKE_SOURCE_DIR}/CMake/FindPackagesPost.cmake)

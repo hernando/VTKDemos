@@ -65,6 +65,7 @@ message(STATUS "Python Lib Prefix: ${PYTHON_LIBRARY_PREFIX}")
 ###############################################################################
 ## SUBPROJECTS
 
+configure_file(common/paths.py.in ${CMAKE_BINARY_DIR}/bin/paths.py)
 add_subdirectory(intro)
 add_subdirectory(ray_cast_spheres)
 add_subdirectory(isosurfaces)
