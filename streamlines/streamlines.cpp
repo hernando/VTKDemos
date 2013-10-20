@@ -47,7 +47,7 @@
 #include <stdexcept>
 
 vtkSmartPointer<vtkImageData> readData(const std::string &filename);
-vtkSmartPointer<vtkActor> doOutline(vtkDataSet *data);
+vtkSmartPointer<vtkActor> createOutline(vtkDataSet *data);
 
 class BeginInteraction : public vtkCommand
 {
@@ -89,8 +89,7 @@ int main()
         readData((common::dataPath() + "/TwoSwirls_64x64x64.vec").c_str());
 
     /* Streamline seeder */
-    //vtkSmartPointer<vtkPlaneSource> seeds =
-    //    vtkSmartPointer<vtkPlaneSource>::New();
+    //vtkSmartPointer<vtkPlaneSource> seeds = vtkPlaneSource::New();
     //seeds->SetXResolution(16);
     //seeds->SetYResolution(16);
     //seeds->SetOrigin(0, 16, 0);
@@ -102,11 +101,9 @@ int main()
     widget->SetInputData(data);
     widget->PlaceWidget();
     widget->GetPolyData(seeds);
-    //widget->ClampToBoundsOn();
 
     /* Streamline filter */
-    vtkSmartPointer<vtkStreamLine> streamLine =
-        vtkSmartPointer<vtkStreamLine>::New();
+    vtkSmartPointer<vtkStreamLine> streamLine = vtkStreamLine::New();
     streamLine->SetInputData(data);
     //streamLine->SetSourceConnection(seeds->GetOutputPort());
     streamLine->SetSourceData(seeds);
@@ -120,16 +117,14 @@ int main()
     streamLine->SetIntegrator(vtkRungeKutta4::New());
 
     ///* Tube filter */
-    //vtkSmartPointer<vtkTubeFilter> tubes =
-    //    vtkSmartPointer<vtkTubeFilter>::New();
+    //vtkSmartPointer<vtkTubeFilter> tubes = vtkTubeFilter::New();
     //tubes->SetRadius(0.25);
     //tubes->SetNumberOfSides(5);
     //tubes->SidesShareVerticesOn();
     //tubes->SetInputConnection(streamLine->GetOutputPort());
 
     /* Ribbon filter */
-    vtkSmartPointer<vtkRibbonFilter> ribbons =
-        vtkSmartPointer<vtkRibbonFilter>::New();
+    vtkSmartPointer<vtkRibbonFilter> ribbons = vtkRibbonFilter::New();
     ribbons->SetWidth(0.25);
     ribbons->VaryWidthOn();
     ribbons->SetInputConnection(streamLine->GetOutputPort());
@@ -137,8 +132,7 @@ int main()
     vtkSmartPointer<vtkAlgorithm> paths = ribbons;
 
     /* Mapper and actor */
-    vtkSmartPointer<vtkPolyDataMapper> mapper =
-        vtkSmartPointer<vtkPolyDataMapper>::New();
+    vtkSmartPointer<vtkPolyDataMapper> mapper = vtkPolyDataMapper::New();
     mapper->SetInputConnection(paths->GetOutputPort());
     double range[2] = {data->GetScalarRange()[0], data->GetScalarRange()[1]};
     mapper->SetScalarRange(range);
@@ -148,13 +142,13 @@ int main()
     transferFunction->AddRGBPoint(range[1], 0, 0, 1);
     mapper->SetLookupTable(transferFunction);
 
-    vtkSmartPointer<vtkActor> actor = vtkSmartPointer<vtkActor>::New();
+    vtkSmartPointer<vtkActor> actor = vtkActor::New();
     actor->SetMapper(mapper);
 
     /* Creating the renderer and the render window */
     vtkSmartPointer<vtkRenderer> renderer = vtkRenderer::New();
-    renderer->AddActor(doOutline(data));
     renderer->AddActor(actor);
+    renderer->AddActor(createOutline(data));
     renderer->SetBackground(0.2, 0.3, 0.4);
 
     vtkSmartPointer<vtkRenderWindow> window = vtkRenderWindow::New();
@@ -213,17 +207,15 @@ vtkSmartPointer<vtkImageData> readData(const std::string &filename)
     return field;
 }
 
-vtkSmartPointer<vtkActor> doOutline(vtkDataSet *data)
+vtkSmartPointer<vtkActor> createOutline(vtkDataSet *data)
 {
-    vtkSmartPointer<vtkOutlineFilter> outline =
-        vtkSmartPointer<vtkOutlineFilter>::New();
+    vtkSmartPointer<vtkOutlineFilter> outline = vtkOutlineFilter::New();
     outline->SetInputData(data);
 
-    vtkSmartPointer<vtkPolyDataMapper> mapper =
-        vtkSmartPointer<vtkPolyDataMapper>::New();
+    vtkSmartPointer<vtkPolyDataMapper> mapper = vtkPolyDataMapper::New();
     mapper->SetInputConnection(outline->GetOutputPort());
 
-    vtkSmartPointer<vtkActor> actor = vtkSmartPointer<vtkActor>::New();
+    vtkSmartPointer<vtkActor> actor = vtkActor::New();
     actor->SetMapper(mapper);
 
     return actor;
