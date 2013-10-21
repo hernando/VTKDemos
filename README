@@ -1,0 +1,14 @@
+VTKDemos
+========
+
+A small set of VTK6 examples including the datasets.
+* intro: Very simple pipeline setup.
+* ray_cast_spheres: Geometry shader example
+* isosurfaces: Countours and cut planes on a scalar field.
+* volume_rendering: Simple pipeline for volume rendering
+* streamlines: Vector field visualization using stream ribbons. Ribbons are
+seeded with a plane widget.
+
+The compilation scripts require VTK 6, although it's possible that the examples
+also compile with VTK 5.
+
