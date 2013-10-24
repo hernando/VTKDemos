@@ -20,5 +20,5 @@ configure_paths(PATHS_CPP)
 add_executable(volume_rendering volume_rendering.cpp ${PATHS_CPP})
 target_link_libraries(volume_rendering ${VTK_LIBRARIES})
 
-#update_file(volume_rendering.py ${CMAKE_BINARY_DIR}/bin/volume_rendering.py)
+update_file(volume_rendering.py ${CMAKE_BINARY_DIR}/bin/volume_rendering.py)
 

@@ -20,4 +20,4 @@ configure_paths(PATHS_CPP)
 add_executable(isosurfaces isosurfaces.cpp ${PATHS_CPP})
 target_link_libraries(isosurfaces ${VTK_LIBRARIES})
 
-#update_file(isosurfaces.py ${CMAKE_BINARY_DIR}/bin/isosurfaces.py)
+update_file(isosurfaces.py ${CMAKE_BINARY_DIR}/bin/isosurfaces.py)

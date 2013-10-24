@@ -99,17 +99,16 @@ int main()
 
 vtkSmartPointer<vtkActor> doOutline(vtkDataSetReader *reader)
 {
-    vtkSmartPointer<vtkOutlineFilter> outline =
-        vtkSmartPointer<vtkOutlineFilter>::New();
+    vtkSmartPointer<vtkOutlineFilter> outline = vtkOutlineFilter::New();
     outline->SetInputConnection(reader->GetOutputPort());
 
-    vtkSmartPointer<vtkPolyDataMapper> mapper =
-        vtkSmartPointer<vtkPolyDataMapper>::New();
+    vtkSmartPointer<vtkPolyDataMapper> mapper = vtkPolyDataMapper::New();
     mapper->SetInputConnection(outline->GetOutputPort());
 
-    vtkSmartPointer<vtkActor> actor = vtkSmartPointer<vtkActor>::New();
+    vtkSmartPointer<vtkActor> actor = vtkActor::New();
     actor->SetMapper(mapper);
     actor->GetProperty()->SetColor(0, 0, 0);
 
     return actor;
 }
+g

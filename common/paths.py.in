@@ -1,3 +1,5 @@
 import sys
 
 sys.path.append('${VTK_INSTALL_PREFIX}/${PYTHON_LIBRARY_PREFIX}')
+
+data_path = '${CMAKE_SOURCE_DIR}/datasets/'
